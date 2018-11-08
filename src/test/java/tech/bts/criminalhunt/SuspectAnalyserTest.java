@@ -17,13 +17,14 @@ public class SuspectAnalyserTest {
     @Before
     public void suspects(){
 
+
         this.s1Builder = new Suspect.Builder();
         this.s2Builder = new Suspect.Builder();
 
         s1Builder.name("John").age(18).height(180.5).weight(85.0)
                 .hair("brown").eye("green").male(true).build();
 
-        s2Builder.name("John").age(18).height(180.5).weight(85.0).
+        s2Builder.name("john").age(18).height(180.5).weight(85.0).
                 hair("brown").eye("green").male(true).build();
 
     }
@@ -49,10 +50,10 @@ public class SuspectAnalyserTest {
         SuspectAnalyser suspectAnalyser = new SuspectAnalyser();
         Suspect s1 = s1Builder.build();
 
-        Suspect s2 = new Suspect.Builder()
-                .name("john").age(19).height(182.5)
-                .weight(81.0).hair("brown").eye("black")
-                .male(true).build();
+
+        Suspect s2 = s2Builder
+                .age(19).height(182.5)
+                .weight(81.0).build();
 
         // 2 - call same method.
         boolean result = suspectAnalyser.match(s1, s2);
@@ -68,13 +69,12 @@ public class SuspectAnalyserTest {
     @Test
     public void test_completely_different_suspects(){
 
-        // 1 - setup the objects you need. The suspect 4 points but name, age, height, weight are the same
+        // 1 - setup the objects you need. Completely different suspects.
         SuspectAnalyser suspectAnalyser = new SuspectAnalyser();
 
         Suspect s1 = s1Builder.build();
 
-        Suspect s2 = new Suspect.Builder()
-                .name("Anna").age(25).height(170.2)
+        Suspect s2 = s2Builder.name("Anna").age(25).height(170.2)
                 .weight(75.0).hair("blonde").eye("grey")
                 .male(false).build();
 
@@ -95,10 +95,8 @@ public class SuspectAnalyserTest {
 
         Suspect s1 = s1Builder.build();
 
-        Suspect s2 = new Suspect.Builder()
-                .name("john").age(18).height(180.5)
-                .weight(85.0).hair("blonde").eye("grey")
-                .male(true).build();
+
+        Suspect s2 = s2Builder.hair("blonde").eye("grey").build();
 
         // 2 - call same method.
         boolean result = suspectAnalyser.match(s1, s2);
@@ -119,10 +117,11 @@ public class SuspectAnalyserTest {
 
         Suspect s1 = s1Builder.build();
 
-        Suspect s2 = new Suspect.Builder()
-                .name("john").age(19).height(179.0)
-                .weight(82.0).hair("brown").eye("black")
-                .male(true).build();
+        //s2Builder.name("john").age(18).height(180.5).weight(85.0).
+        //                hair("brown").eye("green").male(true).build();
+
+        Suspect s2 = s2Builder.age(19).height(179.0)
+                .weight(82.0).eye("black").build();
 
         // 2 - call same method.
         boolean match = s1.equals(s2);
