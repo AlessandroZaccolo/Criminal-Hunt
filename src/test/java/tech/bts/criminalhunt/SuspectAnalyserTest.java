@@ -10,22 +10,21 @@ import static org.junit.Assert.assertTrue;
 
 public class SuspectAnalyserTest {
 
+    private Suspect.Builder s1Builder;
+    private Suspect.Builder s2Builder;
 
-    private Suspect s1 = new Suspect.Builder()
-            .name("John").age(18).height(180.5)
-            .weight(85.0).hair("brown").eye("green")
-            .male(true)
-            .build();
-
-    Suspect s2 = new Suspect.Builder()
-            .name("John").age(18).height(180.5)
-            .weight(85.0).hair("brown").eye("green")
-            .male(true)
-            .build();
 
     @Before
-    public void before_test(){
+    public void suspects(){
 
+        this.s1Builder = new Suspect.Builder();
+        this.s2Builder = new Suspect.Builder();
+
+        s1Builder.name("John").age(18).height(180.5).weight(85.0)
+                .hair("brown").eye("green").male(true).build();
+
+        s2Builder.name("John").age(18).height(180.5).weight(85.0).
+                hair("brown").eye("green").male(true).build();
 
     }
 
@@ -33,6 +32,9 @@ public class SuspectAnalyserTest {
     public void match_if_same_values() {
 
         SuspectAnalyser suspectAnalyser = new SuspectAnalyser();
+
+        Suspect s1 = s1Builder.build();
+        Suspect s2 = s2Builder.build();
 
         boolean result = suspectAnalyser.match(s1, s2);
 
@@ -45,6 +47,7 @@ public class SuspectAnalyserTest {
 
         // 1 - setup the objects you need. The suspect has 5 or more points.
         SuspectAnalyser suspectAnalyser = new SuspectAnalyser();
+        Suspect s1 = s1Builder.build();
 
         Suspect s2 = new Suspect.Builder()
                 .name("john").age(19).height(182.5)
@@ -68,6 +71,8 @@ public class SuspectAnalyserTest {
         // 1 - setup the objects you need. The suspect 4 points but name, age, height, weight are the same
         SuspectAnalyser suspectAnalyser = new SuspectAnalyser();
 
+        Suspect s1 = s1Builder.build();
+
         Suspect s2 = new Suspect.Builder()
                 .name("Anna").age(25).height(170.2)
                 .weight(75.0).hair("blonde").eye("grey")
@@ -88,6 +93,8 @@ public class SuspectAnalyserTest {
         // 1 - setup the objects you need. The suspect 4 points but name, age, height, weight are the same
         SuspectAnalyser suspectAnalyser = new SuspectAnalyser();
 
+        Suspect s1 = s1Builder.build();
+
         Suspect s2 = new Suspect.Builder()
                 .name("john").age(18).height(180.5)
                 .weight(85.0).hair("blonde").eye("grey")
@@ -107,6 +114,11 @@ public class SuspectAnalyserTest {
     public void test_equal_method (){
 
         // 1 - setup the objects you need. The suspect has 5 or more points.
+
+        SuspectAnalyser suspectAnalyser = new SuspectAnalyser();
+
+        Suspect s1 = s1Builder.build();
+
         Suspect s2 = new Suspect.Builder()
                 .name("john").age(19).height(179.0)
                 .weight(82.0).hair("brown").eye("black")
